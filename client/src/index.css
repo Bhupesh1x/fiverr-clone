@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .menuLinks {
+    @apply text-sm hover:text-gray-200 font-semibold cursor-pointer;
+  }
+
+  .container {
+    @apply max-w-6xl  mx-auto px-4 py-4;
+  }
+  .input {
+    @apply border-2 rounded-md border-gray-300 px-3 py-2 outline-none focus:border-green-500 transition-all duration-150 ease-in w-full mb-3;
+  }
+  .label {
+    @apply text-gray-500 font-bold mb-1;
+  }
+}
+
+.carousel-prev,
+.carousel-next {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: rgb(237, 236, 236) !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  margin: auto !important;
+}
