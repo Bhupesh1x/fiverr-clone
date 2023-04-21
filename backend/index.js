@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
+import gigRoutes from "./routes/gig.routes.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -20,8 +22,10 @@ connectToMongo();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/users", userRoutes);
+app.use("/api/gigs", gigRoutes);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

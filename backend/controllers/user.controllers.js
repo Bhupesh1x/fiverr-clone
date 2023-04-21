@@ -15,7 +15,7 @@ export const register = async (req, res, next) => {
 
     await user.save();
 
-    res.status(500).send("User created sucessfully");
+    res.status(201).send("User created sucessfully");
   } catch (error) {
     next(error);
   }
@@ -50,12 +50,21 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logout = async (req, res) => {
+export const logout = async (req, res, next) => {
   try {
     res
       .clearCookie("accessToken", { sameSite: "none", secure: true })
       .status(200)
       .send("User has been logged out!");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(200).send(user);
   } catch (error) {
     next(error);
   }

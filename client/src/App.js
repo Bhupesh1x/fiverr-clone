@@ -11,10 +11,14 @@ import MyOrders from "./pages/MyOrders";
 import Register from "./pages/Register";
 import AddNewCategory from "./pages/AddNewCategory";
 import Footer from "./components/Footer/Footer";
+import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <Header />
       <Routes>
         <Route path="/" exact element={<Home />} />
@@ -29,7 +33,8 @@ function App() {
         <Route path="/addnewgigs" exact element={<AddNewCategory />} />
       </Routes>
       <Footer />
-    </div>
+      <Toaster />
+    </QueryClientProvider>
   );
 }
 

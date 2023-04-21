@@ -11,7 +11,7 @@
     @apply max-w-6xl  mx-auto px-4 py-4;
   }
   .input {
-    @apply border-2 rounded-md border-gray-300 px-3 py-2 outline-none focus:border-green-500 transition-all duration-150 ease-in w-full mb-3;
+    @apply border-2 rounded-md border-gray-300 px-3 py-1.5 outline-none focus:border-green-500 transition-all duration-150 ease-in w-full mb-2.5;
   }
   .label {
     @apply text-gray-500 font-bold mb-1;
@@ -28,4 +28,9 @@
   top: 0 !important;
   bottom: 0 !important;
   margin: auto !important;
+}
+
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
 }

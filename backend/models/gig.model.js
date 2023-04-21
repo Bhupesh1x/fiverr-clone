@@ -46,7 +46,7 @@ const gigSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    deliveyTime: {
+    deliveryTime: {
       type: Number,
       required: true,
     },
@@ -59,7 +59,7 @@ const gigSchema = new mongoose.Schema(
       required: false,
     },
     sales: {
-      type: number,
+      type: Number,
       default: 0,
     },
   },
