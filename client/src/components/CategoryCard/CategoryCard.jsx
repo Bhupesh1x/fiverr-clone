@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function CategoryCard({ title, desc, img }) {
   return (
-    <Link to="/categories">
+    <Link to="/categories?cat=ai">
       <div className="h-[18rem] w-[15rem] rounded-md shadow-lg text-white mx-5 flex items-center justify-center my-6 relative">
         <img
           src={img}

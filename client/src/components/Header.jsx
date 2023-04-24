@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import newRequest from "../utils/service";
+import { avatarImg } from "../utils/data";
 
 function Header() {
   const [isActive, setIsActive] = useState(false);
@@ -117,10 +118,7 @@ function Header() {
                 onClick={handleToogleMenu}
               >
                 <img
-                  src={
-                    currUser.img ||
-                    '"https://c8.alamy.com/comp/2BHM1DG/a-young-boy-six-years-of-age-looks-intently-at-a-google-nest-mini-smart-speaker-on-a-table-as-he-awaits-its-response-2BHM1DG.jpg"'
-                  }
+                  src={currUser.img ?? avatarImg}
                   alt=""
                   className="h-8 w-8 rounded-full object-cover "
                 />

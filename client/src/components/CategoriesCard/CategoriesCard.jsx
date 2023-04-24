@@ -4,22 +4,18 @@ import HeartImg from "../../Assets/img/heart.png";
 import { useNavigate } from "react-router-dom";
 import newRequest from "../../utils/service";
 import { useQuery } from "@tanstack/react-query";
-
-const avatarImg =
-  "https://img.icons8.com/external-others-inmotus-design/67/null/external-Avatar-avatars-others-inmotus-design-34.png";
+import { avatarImg } from "../../utils/data";
 
 function CategoriesCard({ img, gig }) {
   const navigate = useNavigate();
 
   const { data: user } = useQuery({
-    queryKey: [`user/${gig.userId}`],
+    queryKey: [gig.userId],
     queryFn: () =>
       newRequest.get(`/users/user/${gig.userId}`).then((res) => {
         return res.data;
       }),
   });
-
-  console.log("user", user);
 
   return (
     <div

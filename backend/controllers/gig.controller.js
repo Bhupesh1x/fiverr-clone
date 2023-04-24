@@ -19,8 +19,6 @@ export const createGig = async (req, res, next) => {
 export const deleteGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
-    // console.log("req.userId", req.userId);
-    // console.log("gig.userId", gig);
     if (gig.userId !== req.userId)
       return next(createError(403, "Only seller can delete gig!"));
 

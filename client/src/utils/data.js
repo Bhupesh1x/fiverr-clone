@@ -212,3 +212,6 @@ export const checkLists = [
   "Image upscaling",
   "Additional design",
 ];
+
+export const avatarImg =
+  "https://img.icons8.com/external-others-inmotus-design/67/null/external-Avatar-avatars-others-inmotus-design-34.png";

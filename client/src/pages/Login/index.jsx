@@ -31,7 +31,6 @@ function Login() {
 
       navigate("/");
     } catch (err) {
-      console.log("err", err);
       toast.error(err.response.data, {
         id: notification,
       });

@@ -53,12 +53,9 @@ function Register() {
       toast.success("Register Successfull", {
         id: notification,
       });
-      // localStorage.setItem("currentFiverrUser", JSON.stringify(res.data));
-      console.log(res);
 
       navigate("/login");
     } catch (err) {
-      console.log("err", err);
       toast.error(err.response.data, {
         id: notification,
       });

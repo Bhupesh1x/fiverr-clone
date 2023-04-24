@@ -9,14 +9,11 @@ const columns = [
     width: 200,
     headerName: "Image",
     renderCell: (params) => (
-      <>
-        {console.log(params)}
-        <img
-          src={params.row.image}
-          alt=""
-          className="h-12 w-12 object-contain cursor-pointer"
-        />
-      </>
+      <img
+        src={params.row.image}
+        alt=""
+        className="h-12 w-12 object-contain cursor-pointer"
+      />
     ),
   },
   {

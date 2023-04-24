@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
 import gigRoutes from "./routes/gig.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
+import orderRoutes from "./routes/order.routes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -26,6 +28,8 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/users", userRoutes);
 app.use("/api/gigs", gigRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
