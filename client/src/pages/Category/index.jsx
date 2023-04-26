@@ -5,7 +5,7 @@ import GreenCheckImg from "../../Assets/img/greencheck.png";
 import RecycleImg from "../../Assets/img/recycle.png";
 import { Slider } from "infinite-react-carousel/lib";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import newRequest from "../../utils/service";
 import { avatarImg } from "../../utils/data";
 import Reviews from "../../components/Review/Reviews";
@@ -79,19 +79,13 @@ function Category() {
 
             <Slider slidesToShow={1} arrowsScroll={1}>
               {gig.images.map((image, i) => (
-                <img src={image} key={i} alt="" className="rounded-md" />
+                <img
+                  src={image}
+                  key={i}
+                  alt=""
+                  className="rounded-md object-contain h-[100%] w-[100%]"
+                />
               ))}
-
-              <img
-                src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-                className="rounded-md"
-              />
-              <img
-                src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-                className="rounded-md"
-              />
             </Slider>
 
             {/* About The Category */}
@@ -113,7 +107,7 @@ function Category() {
 
           {/* Right */}
           <div className="w-[35%]">
-            <RightModel gig={gig} />
+            <RightModel gig={gig} id={id} />
           </div>
         </div>
       )}
@@ -203,7 +197,7 @@ function AboutTheCategory({ gig }) {
   );
 }
 
-function RightModel({ gig }) {
+function RightModel({ gig, id }) {
   return (
     <div className="border border-gray-200 rounded-md shadow-sm py-3 px-6 sticky top-[7rem]">
       <div className="flex items-center justify-between">
@@ -235,9 +229,11 @@ function RightModel({ gig }) {
           <span className="text-sm text-gray-400 font-semibold">{feature}</span>
         </div>
       ))}
-      <button className="bg-green-600 py-1.5 rounded-sm hover:bg-green-700 px-4 w-full text-white font-semibold">
-        Continue
-      </button>
+      <Link to={`/pay/${id}`}>
+        <button className="bg-green-600 py-1.5 rounded-sm hover:bg-green-700 px-4 w-full text-white font-semibold">
+          Continue
+        </button>
+      </Link>
     </div>
   );
 }

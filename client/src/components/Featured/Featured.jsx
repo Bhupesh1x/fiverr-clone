@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchImg from "../../Assets/img/search.png";
 import ManImg from "../../Assets/img/man.png";
+import { useNavigate } from "react-router-dom";
 
 function Featured() {
+  const [input, setInput] = useState("");
+  const navigate = useNavigate("");
+
+  function handleSubmit() {
+    navigate(`/categories?search=${input}`);
+  }
+
   return (
     <div className="bg-[#013914] text-white">
       <div className="container py-0 flex items-center gap-8">
@@ -22,9 +30,13 @@ function Featured() {
                 type="text"
                 placeholder="Search here"
                 className="flex-1 outline-none text-black pl-2 capitalize"
+                onChange={(e) => setInput(e.target.value)}
               />
             </div>
-            <button className="bg-green-500 py-[0.52rem] hover:opacity-70 px-4">
+            <button
+              onClick={handleSubmit}
+              className="bg-green-500 py-[0.52rem] hover:opacity-70 px-4"
+            >
               Search
             </button>
           </div>

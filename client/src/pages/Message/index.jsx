@@ -1,17 +1,44 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import newRequest from "../../utils/service";
+import { toast } from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
-const messages = [
-  {
-    message: "Lorem 123 lorem lorem",
-    fromSelf: true,
-  },
-  {
-    message: "Lorem 123 lorem lorem",
-    fromSelf: false,
-  },
-];
+function Message() {
+  const querClient = useQueryClient();
+  const { id } = useParams();
+  const currUser = JSON.parse(localStorage.getItem("currentFiverrUser"));
 
-function index() {
+  const {
+    isLoading,
+    error,
+    data: messages,
+  } = useQuery({
+    queryKey: ["messages"],
+    queryFn: () =>
+      newRequest.get(`/messages/${id}`).then((res) => {
+        return res.data;
+      }),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (message) => {
+      return newRequest.post("/messages", message);
+    },
+    onSuccess: () => {
+      querClient.invalidateQueries(["messages"]);
+    },
+    onError: (err) => {
+      toast.error(err.response.data);
+    },
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    mutation.mutate({ conversationId: id, desc: e.target[0].value });
+    e.target[0].value = "";
+  }
+
   return (
     <div className="py-4 container relative h-[100%] text-white pl-4">
       {/* Header  */}
@@ -22,39 +49,49 @@ function index() {
             alt="user_avatar"
             className="h-7 w-7 rounded-full"
           />
-          <p className="text-lg font-semibold">John Doe</p>
+          <p className="text-lg font-semibold">Messages</p>
         </div>
       </div>
 
       {/* Message */}
-      <div className="my-3 h-[62vh] overflow-scroll">
-        {messages?.map((msg, i) => (
-          <div>
+      {isLoading ? (
+        "Loading..."
+      ) : error ? (
+        "Something went wrong"
+      ) : (
+        <div className="my-3 h-[62vh] overflow-scroll">
+          {messages?.map((msg, i) => (
             <div
               key={i}
               className={`p-3 w-fit my-3 flex rounded-md ${
-                msg.fromSelf === true
+                msg.userId === currUser._id
                   ? " bg-blue-400 ml-auto"
                   : " bg-orange-400 mr-auto"
               }`}
             >
-              <p>{msg.message}</p>
+              <p>{msg.desc}</p>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      <div className=" text-black flex items-center gap-3">
+      <form
+        onSubmit={handleSubmit}
+        className=" text-black flex items-center gap-3"
+      >
         <textarea
           className="w-[90%] border-2 rounded-md border-gray-300 px-2 py-1 outline-none focus:border-green-500 transition-all duration-150 ease"
           placeholder="Enter your message"
         ></textarea>
-        <button className="bg-green-600 w-[10%] text-white text-sm font-semibold px-2 py-3 rounded-md hover:bg-green-700">
+        <button
+          type="submit"
+          className="bg-green-600 w-[10%] text-white text-sm font-semibold px-2 py-3 rounded-md hover:bg-green-700"
+        >
           Send
         </button>
-      </div>
+      </form>
     </div>
   );
 }
 
-export default index;
+export default Message;

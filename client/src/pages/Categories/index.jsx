@@ -8,6 +8,9 @@ import { useLocation } from "react-router-dom";
 function Categories() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sortBy, setSortBy] = useState("sales");
+  const location = useLocation();
+  // const { title, desc } = location?.state;
+  console.log("llocation->", location);
 
   function reSort(type) {
     setSortBy(type);
@@ -29,15 +32,18 @@ function Categories() {
       }),
   });
 
+  console.log("search", search);
+
   useEffect(() => {
     refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
 
   return (
     <div className="container">
-      <h1 className="text-2xl font-bold">Ai Artists</h1>
+      <h1 className="text-2xl font-bold">{location.state.title || "Title"}</h1>
       <p className="text-gray-400 text-base py-3">
-        Explore the boundries of art and technology with Fiverr's Ai Artists
+        {location.state.desc || "Title"}
       </p>
       <div className="flex">
         <div className="flex items-center justify-end w-full relative">

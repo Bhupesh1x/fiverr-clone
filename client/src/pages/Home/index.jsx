@@ -2,28 +2,49 @@ import React from "react";
 import Featured from "../../components/Featured/Featured";
 import TrustedBy from "../../components/TrustedBy/TrustedBy";
 import Slide from "../../components/Slide/Slide";
-import { cards, summaryInfo } from "../../utils/data";
+import { summaryInfo } from "../../utils/data";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Video from "../../Assets/img/video.mp4";
 import CheckImg from "../../Assets/img/check.png";
 import { projects } from "../../utils/data";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../utils/service";
 
-function index() {
+function Home() {
+  const {
+    isLoading,
+    error,
+    data: category,
+  } = useQuery({
+    queryKey: ["category"],
+    queryFn: () =>
+      newRequest.get(`/category`).then((res) => {
+        return res.data;
+      }),
+  });
+
   return (
     <>
       <Featured />
       <TrustedBy />
-      <Slide arrowsScroll={4} slideToShow={4}>
-        {cards.map((card) => (
-          <CategoryCard
-            key={card.id}
-            title={card.title}
-            desc={card.desc}
-            img={card.img}
-          />
-        ))}
-      </Slide>
+      {isLoading ? (
+        "Loading..."
+      ) : error ? (
+        "something went wrong!"
+      ) : (
+        <Slide arrowsScroll={4} slideToShow={4}>
+          {category?.map((card) => (
+            <CategoryCard
+              key={card._id}
+              title={card.title}
+              desc={card.desc}
+              img={card.img}
+              cat={card.cat}
+            />
+          ))}
+        </Slide>
+      )}
 
       <Features />
       <Explore />
@@ -43,7 +64,7 @@ function index() {
   );
 }
 
-export default index;
+export default Home;
 
 function Features() {
   return (

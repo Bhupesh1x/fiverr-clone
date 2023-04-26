@@ -42,7 +42,7 @@ function Header() {
     ];
 
     currUser?.isSeller &&
-      data.push(
+      data.unshift(
         {
           id: 3,
           link: "/gigs",
@@ -62,7 +62,7 @@ function Header() {
     e.preventDefault();
     const notification = () => toast("Loging You Out...");
     try {
-      const res = await newRequest.get("/users/logout");
+      await newRequest.get("/users/logout");
       toast.success("Logout Successfull", {
         id: notification,
       });

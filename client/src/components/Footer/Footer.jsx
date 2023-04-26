@@ -7,14 +7,21 @@ import InstagramImg from "../../Assets/img/instagram.png";
 import LanguageImg from "../../Assets/img/language.png";
 import CoinImg from "../../Assets/img/coin.png";
 import AccessibilityImg from "../../Assets/img/accessibility.png";
+import { useLocation } from "react-router-dom";
 
 function Footer() {
+  const { pathname } = useLocation();
+  console.log("location", pathname);
   return (
-    <div className="bg-gray-100 text-gray-400 py-3">
+    <div
+      className={`bg-gray-100 text-gray-400 py-3 ${
+        pathname !== "/" && "sticky bottom-0 w-full z-60"
+      }`}
+    >
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <h2>liverr</h2>
-          <span>© Liverr International Ltd. 2023</span>
+          <h2>Fiverr</h2>
+          <span>© Fiverr International Ltd. 2023</span>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-3">

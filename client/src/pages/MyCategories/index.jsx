@@ -1,128 +1,26 @@
 import React from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import DeleteImg from "../../Assets/img/delete.png";
 import { Link } from "react-router-dom";
+import Table from "../../components/Table/Table";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../utils/service";
 
-const columns = [
-  { field: "id", headerName: "ID", width: 200 },
-  {
-    width: 200,
-    headerName: "Image",
-    renderCell: (params) => (
-      <img
-        src={params.row.image}
-        alt=""
-        className="h-12 w-12 object-contain cursor-pointer"
-      />
-    ),
-  },
-  {
-    field: "firstName",
-    headerName: "Title",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "lastName",
-    headerName: "Price",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "age",
-    headerName: "Orders",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "date",
-    width: 200,
-    headerName: "Action",
-    renderCell: () => (
-      <img
-        src={DeleteImg}
-        alt=""
-        className="h-5 w-5 object-contain cursor-pointer"
-      />
-    ),
-  },
-];
+const columns = ["ID", "Image", "Title", "Price", "Orders", "Action"];
 
-function index() {
-  const rows = [
-    {
-      id: 1,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Snow",
-      firstName: "Jon",
-      age: 35,
-    },
-    {
-      id: 2,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Lannister",
-      firstName: "Cersei",
-      age: 42,
-    },
-    {
-      id: 3,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Lannister",
-      firstName: "Jaime",
-      age: 45,
-    },
-    {
-      id: 4,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Stark",
-      firstName: "Arya",
-      age: 16,
-    },
-    {
-      id: 5,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Targaryen",
-      firstName: "Daenerys",
-      age: null,
-    },
-    {
-      id: 6,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Melisandre",
-      firstName: null,
-      age: 150,
-    },
-    {
-      id: 7,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Clifford",
-      firstName: "Ferrara",
-      age: 44,
-    },
-    {
-      id: 8,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Frances",
-      firstName: "Rossini",
-      age: 36,
-    },
-    {
-      id: 9,
-      image:
-        "https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      lastName: "Roxie",
-      firstName: "Harvey",
-      age: 65,
-    },
-  ];
+function MyCategories() {
+  const currUser = JSON.parse(localStorage.getItem("currentFiverrUser"));
+
+  const {
+    isLoading,
+    error,
+    data: gigs,
+  } = useQuery({
+    queryKey: ["myGigs"],
+    queryFn: () =>
+      newRequest.get(`/gigs?userId=${currUser?._id}`).then((res) => {
+        return res.data;
+      }),
+  });
+
   return (
     <div>
       <div className="container">
@@ -134,24 +32,18 @@ function index() {
             </button>
           </Link>
         </div>
-        <div className="h-[67vh] w-[100%]">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 8,
-                },
-              },
-            }}
-            pageSizeOptions={[8]}
-            disableRowSelectionOnClick
-          />
-        </div>
+        {isLoading ? (
+          "Loading..."
+        ) : error ? (
+          "Something went wrong"
+        ) : (
+          <div className="h-[67vh] w-[100%] overflow-scroll">
+            <Table rows={gigs} columns={columns} tableName="mycategories" />
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-export default index;
+export default MyCategories;

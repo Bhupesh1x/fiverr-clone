@@ -1,25 +1,27 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const conversationSchema = new Schema(
+const categorySchema = new Schema(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    sellerId: {
+    userId: {
       type: String,
       required: true,
     },
-    buyerId: {
+    title: {
       type: String,
       required: true,
     },
-    lastMessage: {
+    desc: {
       type: String,
-      required: false,
-      default: "...",
+      required: true,
+    },
+    img: {
+      type: String,
+      required: true,
+    },
+    cat: {
+      type: String,
+      required: true,
     },
   },
   {
@@ -27,4 +29,4 @@ const conversationSchema = new Schema(
   }
 );
 
-export default mongoose.model("Conversation", conversationSchema);
+export default mongoose.model("Category", categorySchema);

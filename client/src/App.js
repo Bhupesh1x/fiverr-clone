@@ -13,6 +13,8 @@ import AddNewCategory from "./pages/AddNewCategory";
 import Footer from "./components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Pay from "./pages/Pay/Pay";
+import Success from "./pages/Success/Success";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +33,8 @@ function App() {
         <Route path="/myorders" exact element={<MyOrders />} />
         <Route path="/register" exact element={<Register />} />
         <Route path="/addnewgigs" exact element={<AddNewCategory />} />
+        <Route path="/pay/:id" exact element={<Pay />} />
+        <Route path="/success" exact element={<Success />} />
       </Routes>
       <Footer />
       <Toaster />

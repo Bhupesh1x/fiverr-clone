@@ -47,7 +47,7 @@ function Register() {
     e.preventDefault();
     const notification = () => toast("Registering the user...");
     try {
-      const res = await newRequest.post("/users/register", {
+      await newRequest.post("/users/register", {
         ...userInfo,
       });
       toast.success("Register Successfull", {

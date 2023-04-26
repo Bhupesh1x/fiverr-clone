@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CategoryCard({ title, desc, img }) {
+function CategoryCard({ title, desc, img, cat }) {
   return (
-    <Link to="/categories?cat=ai">
+    <Link to={`/categories?cat=${cat}`} state={{ title, desc }}>
       <div className="h-[18rem] w-[15rem] rounded-md shadow-lg text-white mx-5 flex items-center justify-center my-6 relative">
         <img
           src={img}
