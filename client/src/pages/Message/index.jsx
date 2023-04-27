@@ -48,6 +48,7 @@ function Message() {
             src="https://img.icons8.com/external-others-cattaleeya-thongsriphong/64/null/external-Avatar-male-avatar-with-medical-mask-blue-others-cattaleeya-thongsriphong-10.png"
             alt="user_avatar"
             className="h-7 w-7 rounded-full"
+            loading="lazy"
           />
           <p className="text-lg font-semibold">Messages</p>
         </div>

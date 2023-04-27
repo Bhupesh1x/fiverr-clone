@@ -1,20 +1,21 @@
+import React, { Suspense } from "react";
 import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Categories from "./pages/Categories";
-import Category from "./pages/Category";
-import Login from "./pages/Login";
-import Message from "./pages/Message";
-import Messages from "./pages/Messages";
-import MyCategories from "./pages/MyCategories";
-import MyOrders from "./pages/MyOrders";
-import Register from "./pages/Register";
-import AddNewCategory from "./pages/AddNewCategory";
-import Footer from "./components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Pay from "./pages/Pay/Pay";
-import Success from "./pages/Success/Success";
+const Home = React.lazy(() => import("./pages/Home"));
+const Categories = React.lazy(() => import("./pages/Categories"));
+const Category = React.lazy(() => import("./pages/Category"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Message = React.lazy(() => import("./pages/Message"));
+const Messages = React.lazy(() => import("./pages/Messages"));
+const MyCategories = React.lazy(() => import("./pages/MyCategories"));
+const MyOrders = React.lazy(() => import("./pages/MyOrders"));
+const Register = React.lazy(() => import("./pages/Register"));
+const AddNewCategory = React.lazy(() => import("./pages/AddNewCategory"));
+const Footer = React.lazy(() => import("./components/Footer/Footer"));
+const Pay = React.lazy(() => import("./pages/Pay/Pay"));
+const Success = React.lazy(() => import("./pages/Success/Success"));
 
 const queryClient = new QueryClient();
 
@@ -23,20 +24,118 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Header />
       <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/categories" exact element={<Categories />} />
-        <Route path="/category/:id" exact element={<Category />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/message/:id" exact element={<Message />} />
-        <Route path="/messages" exact element={<Messages />} />
-        <Route path="/gigs" exact element={<MyCategories />} />
-        <Route path="/myorders" exact element={<MyOrders />} />
-        <Route path="/register" exact element={<Register />} />
-        <Route path="/addnewgigs" exact element={<AddNewCategory />} />
-        <Route path="/pay/:id" exact element={<Pay />} />
-        <Route path="/success" exact element={<Success />} />
+        <Route
+          path="/"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/categories"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Categories />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/category/:id"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Category />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/login"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Login />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/message/:id"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Message />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/messages"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Messages />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gigs"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <MyCategories />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/myorders"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <MyOrders />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/register"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Register />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/addnewgigs"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <AddNewCategory />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/pay/:id"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Pay />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/success"
+          exact
+          element={
+            <Suspense fallback={"Loading..."}>
+              <Success />
+            </Suspense>
+          }
+        />
       </Routes>
-      <Footer />
+      <Suspense fallback={"Loading..."}>
+        <Footer />
+      </Suspense>
       <Toaster />
     </QueryClientProvider>
   );

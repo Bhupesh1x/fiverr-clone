@@ -90,9 +90,15 @@ function Header() {
             </h1>
           </Link>
           <div className="flex items-center space-x-4">
-            <p className="font-semibold cursor-pointer">Fiverr Business</p>
-            <p className="font-semibold cursor-pointer">Explore</p>
-            <p className="font-semibold cursor-pointer">English</p>
+            <p className="font-semibold cursor-pointer hidden md:inline-flex">
+              Fiverr Business
+            </p>
+            <p className="font-semibold cursor-pointer hidden md:inline-flex">
+              Explore
+            </p>
+            <p className="font-semibold cursor-pointer hidden md:inline-flex">
+              English
+            </p>
             {!currUser && (
               <Link to="/login">
                 {" "}
@@ -114,16 +120,17 @@ function Header() {
               </Link>
             ) : (
               <div
-                className="flex items-center gap-3 relative cursor-pointer transition-all duration-700 ease-in select-none border-l border-green-600 pl-2"
+                className="flex items-center gap-3 relative cursor-pointer select-none border-l border-green-600 pl-2"
                 onClick={handleToogleMenu}
               >
                 <img
                   src={currUser.img ?? avatarImg}
                   alt=""
-                  className="h-8 w-8 rounded-full object-cover "
+                  className="h-8 w-8 rounded-full object-cover"
+                  loading="lazy"
                 />
                 <p
-                  className={`font-semibold ${
+                  className={`font-semibold hover:opacity-70 ${
                     isActive ? "text-black" : "text-white"
                   }`}
                 >
@@ -131,8 +138,8 @@ function Header() {
                 </p>
 
                 {isMenuOpen && (
-                  <div className="absolute top-10 right-0 bg-[#42614d] rounded-md py-2 px-3 text-white flex flex-col gap-2 w-[10rem] shadow-md transition-all duration-700 cubic-bezier(0.4, 0, 0.2, 1)">
-                    {menuLinks.map((menuLink) => (
+                  <div className="absolute top-10 right-0 bg-[#42614d] rounded-md py-2 px-3 text-white flex flex-col gap-2 w-[10rem] shadow-md transition-all duration-700 ease-in">
+                    {menuLinks?.map((menuLink) => (
                       <Link to={menuLink.link} key={menuLink.id}>
                         <p className="menuLinks">{menuLink.name}</p>
                       </Link>
@@ -161,7 +168,7 @@ export default Header;
 
 function HeaderMenu() {
   return (
-    <div className="bg-white text-black shadow-md">
+    <div className="bg-white text-black shadow-md hidden lg:block">
       <div className="flex items-center cursor-pointer  max-w-6xl justify-between text-sm mx-auto px-4 py-1">
         <p>Graphics & Design</p>
         <p>Video & Animation</p>

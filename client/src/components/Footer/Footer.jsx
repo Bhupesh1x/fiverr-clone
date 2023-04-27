@@ -11,38 +11,73 @@ import { useLocation } from "react-router-dom";
 
 function Footer() {
   const { pathname } = useLocation();
-  console.log("location", pathname);
   return (
     <div
       className={`bg-gray-100 text-gray-400 py-3 ${
         pathname !== "/" && "sticky bottom-0 w-full z-60"
       }`}
     >
-      <div className="container flex items-center justify-between">
+      <div className="container flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-0">
         <div className="flex items-center gap-4">
           <h2>Fiverr</h2>
           <span>© Fiverr International Ltd. 2023</span>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-3">
-            <img src={TwitterImg} alt="" className="h-5 w-5 object-contain" />
-            <img src={FacebookImg} alt="" className="h-5 w-5 object-contain" />
-            <img src={LinkedinImg} alt="" className="h-5 w-5 object-contain" />
-            <img src={PinterestImg} alt="" className="h-5 w-5 object-contain" />
-            <img src={InstagramImg} alt="" className="h-5 w-5 object-contain" />
+            <img
+              src={TwitterImg}
+              alt=""
+              className="h-5 w-5 object-contain"
+              loading="lazy"
+            />
+            <img
+              src={FacebookImg}
+              alt=""
+              className="h-5 w-5 object-contain"
+              loading="lazy"
+            />
+            <img
+              src={LinkedinImg}
+              alt=""
+              className="h-5 w-5 object-contain"
+              loading="lazy"
+            />
+            <img
+              src={PinterestImg}
+              alt=""
+              className="h-5 w-5 object-contain"
+              loading="lazy"
+            />
+            <img
+              src={InstagramImg}
+              alt=""
+              className="h-5 w-5 object-contain"
+              loading="lazy"
+            />
           </div>
           <div className="flex items-center gap-1">
-            <img src={LanguageImg} alt="" className="h-5 w-5 object-contain" />
+            <img
+              src={LanguageImg}
+              alt=""
+              className="h-5 w-5 object-contain"
+              loading="lazy"
+            />
             <span className="text-sm">English</span>
           </div>
           <div className="flex items-center gap-1">
-            <img src={CoinImg} alt="" className="h-5 w-5 object-contain" />
+            <img
+              src={CoinImg}
+              alt=""
+              className="h-5 w-5 object-contain"
+              loading="lazy"
+            />
             <span className="text-sm">USD</span>
           </div>
           <img
             src={AccessibilityImg}
             alt=""
             className="h-5 w-5 object-contain"
+            loading="lazy"
           />
         </div>
       </div>

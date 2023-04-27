@@ -26,6 +26,7 @@ function CategoriesCard({ img, gig }) {
         src={gig?.coverImg}
         alt=""
         className="h-[50%] w-[100%] object-cover rounded-t-md"
+        loading="lazy"
       />
 
       <div className="bg-gray-50 rounded-b-md shadow-lg">
@@ -35,12 +36,19 @@ function CategoriesCard({ img, gig }) {
               src={user?.img ?? avatarImg}
               alt=""
               className="h-8 w-8 object-cover rounded-full"
+              loading="lazy"
             />
             <p className="">{user?.username}</p>
           </div>
+          <p className="py-2 text-sm text-gray-700">{gig?.title}</p>
           <p className="py-2 text-xs text-gray-500">{gig?.desc}</p>
           <div className="flex items-center gap-3">
-            <img src={StarImg} alt="" className="h-4 w-4 object-contain" />
+            <img
+              src={StarImg}
+              alt=""
+              className="h-4 w-4 object-contain"
+              loading="lazy"
+            />
             <span className="text-sm">
               {!isNaN(gig?.totalStars / gig?.starNumber) &&
                 Math.round(gig?.totalStars / gig?.starNumber)}
@@ -49,7 +57,12 @@ function CategoriesCard({ img, gig }) {
         </div>
         <hr />
         <div className="py-2 px-3 flex items-center justify-between">
-          <img src={HeartImg} alt="" className="h-4 w-4 object-contain" />
+          <img
+            src={HeartImg}
+            alt=""
+            className="h-4 w-4 object-contain"
+            loading="lazy"
+          />
           <div className="text-right">
             <p className="text-base text-gray-400">Starting At</p>
             <p className="text-xl text-gray-500">$ {gig?.price}</p>

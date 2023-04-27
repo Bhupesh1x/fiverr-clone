@@ -32,6 +32,7 @@ function Review({ review }) {
               src={user.img ?? avatarImg}
               alt=""
               className="h-12 w-12 object-cover rounded-full"
+              loading="lazy"
             />
             <div className="">
               <p className="font-semibold text-gray-500">{user.username}</p>
@@ -55,9 +56,19 @@ function Review({ review }) {
       <div className="flex items-center gap-2 my-3">
         <p className="font-bold">Helpfull ?</p>
 
-        <img src={LikeImg} alt="" className="h-4 w-4 object-contain" />
+        <img
+          src={LikeImg}
+          alt=""
+          className="h-4 w-4 object-contain"
+          loading="lazy"
+        />
         <span>Yes</span>
-        <img src={DislikeImg} alt="" className="h-4 w-4 object-contain" />
+        <img
+          src={DislikeImg}
+          alt=""
+          className="h-4 w-4 object-contain"
+          loading="lazy"
+        />
         <span>No</span>
       </div>
       <hr />

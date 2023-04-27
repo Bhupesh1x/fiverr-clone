@@ -51,7 +51,7 @@ function Reviews({ gig }) {
         ? "Loading..."
         : error
         ? "Something went wrong"
-        : reviews.map((review) => <Review key={review._id} review={review} />)}
+        : reviews?.map((review) => <Review key={review._id} review={review} />)}
 
       <form
         onSubmit={handleSubmit}

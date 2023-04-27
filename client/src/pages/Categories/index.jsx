@@ -9,8 +9,6 @@ function Categories() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sortBy, setSortBy] = useState("sales");
   const location = useLocation();
-  // const { title, desc } = location?.state;
-  console.log("llocation->", location);
 
   function reSort(type) {
     setSortBy(type);
@@ -32,8 +30,6 @@ function Categories() {
       }),
   });
 
-  console.log("search", search);
-
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,9 +37,9 @@ function Categories() {
 
   return (
     <div className="container">
-      <h1 className="text-2xl font-bold">{location.state.title || "Title"}</h1>
+      <h1 className="text-2xl font-bold">{location.state?.title ?? "Title"}</h1>
       <p className="text-gray-400 text-base py-3">
-        {location.state.desc || "Title"}
+        {location.state?.desc ?? "Title"}
       </p>
       <div className="flex">
         <div className="flex items-center justify-end w-full relative">
@@ -54,6 +50,7 @@ function Categories() {
             alt=""
             className="h-4 w-4 object-contain cursor-pointer"
             onClick={() => setIsMenuOpen((prev) => !prev)}
+            loading="lazy"
           />
           {isMenuOpen && (
             <div className="absolute top-8 right-0 bg-[#42614d] rounded-md py-2 px-3 text-white flex flex-col gap-2 w-[10rem] shadow-md transition-all duration-700 cubic-bezier(0.4, 0, 0.2, 1)">
@@ -68,11 +65,17 @@ function Categories() {
         </div>
       </div>
       <div className="flex items-center justify-between flex-wrap gap-2">
-        {isLoading
-          ? "Loading"
-          : error
-          ? "Something went wrong!"
-          : gigs?.map((gig) => <CategoriesCard key={gig._id} gig={gig} />)}
+        {isLoading ? (
+          "Loading"
+        ) : error ? (
+          "Something went wrong!"
+        ) : gigs.length > 0 ? (
+          gigs?.map((gig) => <CategoriesCard key={gig._id} gig={gig} />)
+        ) : (
+          <p>
+            There is no Gigs present at the moment for the particular category.
+          </p>
+        )}
       </div>
     </div>
   );

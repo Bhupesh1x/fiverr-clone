@@ -47,8 +47,8 @@ function Category() {
       ) : error ? (
         "Something went workong"
       ) : (
-        <div className="container flex gap-6">
-          <div className="w-[65%]">
+        <div className="container flex flex-col md:flex-row gap-6">
+          <div className="w-full md:w-[65%]">
             <h1 className="text-3xl font-bold">{gig.title}</h1>
             {isLoadingUser ? (
               "Loading..."
@@ -60,6 +60,7 @@ function Category() {
                   src={user.img ?? avatarImg}
                   alt=""
                   className="h-8 w-8 object-cover rounded-full"
+                  loading="lazy"
                 />
                 <span className="text-gray-500">{user.username}</span>
                 {!isNaN(gig.totalStars / gig.starNumber) && (
@@ -78,12 +79,13 @@ function Category() {
             )}
 
             <Slider slidesToShow={1} arrowsScroll={1}>
-              {gig.images.map((image, i) => (
+              {gig.images?.map((image, i) => (
                 <img
                   src={image}
                   key={i}
                   alt=""
                   className="rounded-md object-contain h-[100%] w-[100%]"
+                  loading="lazy"
                 />
               ))}
             </Slider>
@@ -106,7 +108,7 @@ function Category() {
           </div>
 
           {/* Right */}
-          <div className="w-[35%]">
+          <div className="w-full md:w-[35%]">
             <RightModel gig={gig} id={id} />
           </div>
         </div>
@@ -131,6 +133,7 @@ function AboutTheSeller({ gig, user }) {
           src={user.img ?? avatarImg}
           alt=""
           className=" h-24 w-24 object-cover rounded-full"
+          loading="lazy"
         />
         <div className="flex flex-col gap-1 text-center">
           <p className="text-gray-500 font-semibold">{user.username}</p>
@@ -211,21 +214,36 @@ function RightModel({ gig, id }) {
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 my-3">
-          <img src={ClockImg} alt="" className="h-5 w-5 object-contain" />
+          <img
+            src={ClockImg}
+            alt=""
+            className="h-5 w-5 object-contain"
+            loading="lazy"
+          />
           <span className="text-sm font-semibold">
             {gig.deliveryTime} Days Delivery
           </span>
         </div>
         <div className="flex items-center gap-2 my-2">
-          <img src={RecycleImg} alt="" className="h-5 w-5 object-contain" />
+          <img
+            src={RecycleImg}
+            alt=""
+            className="h-5 w-5 object-contain"
+            loading="lazy"
+          />
           <span className="text-sm font-semibold">
             {gig.revisionNumber} Revisions
           </span>
         </div>
       </div>
-      {gig.features.map((feature, i) => (
+      {gig.features?.map((feature, i) => (
         <div key={i} className="flex items-center my-3 gap-2.5">
-          <img src={GreenCheckImg} alt="" className="h-4 w-4 object-contain" />
+          <img
+            src={GreenCheckImg}
+            alt=""
+            className="h-4 w-4 object-contain"
+            loading="lazy"
+          />
           <span className="text-sm text-gray-400 font-semibold">{feature}</span>
         </div>
       ))}

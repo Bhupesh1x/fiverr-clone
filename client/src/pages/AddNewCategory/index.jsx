@@ -35,7 +35,7 @@ function AddNewCategory() {
       const coverImg = await uploadFile(coverImage);
 
       const images = await Promise.all(
-        [...imagesValue].map(async (file) => {
+        [...imagesValue]?.map(async (file) => {
           const url = await uploadFile(file);
           return url;
         })
@@ -89,7 +89,7 @@ function AddNewCategory() {
       <div className="container">
         <h1 className="text-2xl font-bold mb-3">Add New Gigs</h1>
 
-        <div className="flex justify-between gap-32">
+        <div className="flex flex-col md:flex-row justify-between gap-32">
           <div className="flex-1">
             <p className="label">Title</p>
             <input
@@ -106,7 +106,7 @@ function AddNewCategory() {
               className="input"
               onChange={handleChange}
             >
-              {category.map(({ _id, title, cat }) => (
+              {category?.map(({ _id, title, cat }) => (
                 <option key={_id} value={cat}>
                   {title}
                 </option>
@@ -143,7 +143,7 @@ function AddNewCategory() {
             ></textarea>
             <button
               onClick={handleSubmit}
-              className="bg-green-600 w-full text-white  font-semibold px-2 py-3 rounded-md hover:bg-green-700"
+              className="bg-green-600 w-full hidden md:block text-white  font-semibold px-2 py-3 rounded-md hover:bg-green-700"
             >
               Create
             </button>
@@ -195,10 +195,11 @@ function AddNewCategory() {
               </div>
             </form>
             <div className="flex items-center gap-3 flex-wrap pb-3">
-              {state.features.map((feature) => (
+              {state.features?.map((feature, i) => (
                 <p
                   className="border border-green-400 font-bold w-fit py-1 px-2 rounded-full text-xs"
                   onClick={() => handleRemoveFeature(feature)}
+                  key={i}
                 >
                   {feature}
                   <span className="pl-3 text-red-500 cursor-pointer">x</span>
@@ -212,6 +213,12 @@ function AddNewCategory() {
               name="price"
               onChange={handleChange}
             />
+            <button
+              onClick={handleSubmit}
+              className="bg-green-600 w-full block md:hidden text-white  font-semibold px-2 py-3 rounded-md hover:bg-green-700"
+            >
+              Create
+            </button>
           </div>
         </div>
       </div>
